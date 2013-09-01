@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" 
+	"http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<constant name="struts.objectFactory" value="spring" />
+	<constant name="struts.devMode" value="true" />
+	
+	<package name="myApp" extends="json-default">
+		
+		 <default-action-ref name="dispatcher" />  
+   		 
+		<global-results>
+			<result name="error">/common/error.jsp</result>
+			<result name="success">/common/success.jsp</result>
+		</global-results>
+		
+		
+		
+		<action name="passage_*" class="passageAct" method="{1}Passage">
+			<result name="{1}">/passage/passage{1}.jsp</result>
+		</action>
+		
+		<action name="album_*" class="AlbumAct" method="{1}Album">
+			<result name="{1}">/album/album{1}.jsp</result>
+		</action>
+		
+		<action name="photo_*" class="PhotoAct" method="{1}Photo">
+			<result name="{1}">/album/photo{1}.jsp</result>
+		</action>
+		
+		<action name="photo_addaction" class="PhotoAct" method="addactionPhoto">
+			<result name="addsuccess" type="json">
+            	<param name="root">dataMap</param>
+            </result>
+		</action>
+		
+		<action name="thumbnail" class="PhotoAct" method="thumbnailPhoto">
+			<result name="success" type="stream">
+            </result>
+		</action>
+		
+		<action name="dispatcher" class="passageAct" method="indexPassage">
+			<result name="index">/default.jsp</result>
+		</action>
+		
+	</package>
+</struts>    
